@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Список публикаций</title>
+<style>
+    body{
+        margin:1em auto;
+        max-width:40em;
+        padding:0 .62em;
+        font:1.2em/1.62 sans-serif;
+    }
+    h1,h2 {
+        line-height:1.2;
+    }
+</style>
+<article>
+    <header>
+        <h1>Список категорий</h1>
+        {% for cat in categories %}
+            <h2>{{cat.title}}</h2>
+        {% empty %}
+        <h2>Публикаций нет</h2>
+        {% endfor %}
+
+        <h1>Список всех публикаций.</h1>
+        <aside>Чисто для отладки.</aside>
+    </header>
+    {% for pub in posts %}
+        <h2>{{ pub.title }}</h2>
+        <p>
+            Публикация {{ pub.author }} от {{ pub.when_published }}
+        </p>
+        {{ pub.body|truncatewords:10|linebreaks }}
+    {% empty %}
+        <h2>Публикаций нет</h2>
+        <p>Чтобы добавить что-то в список, зайдите в админку и добавьте их оттуда.</p>
+    {% endfor %}
+</article>
